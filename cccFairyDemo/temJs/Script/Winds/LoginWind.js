@@ -19,15 +19,16 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var UIMgr_1 = require("../../YK/core/UIMgr/UIMgr");
+// import { BaseUI, UIMgr } from "../../YK/core/UIMgr/UIMgr";
 var MessageBox_1 = require("./MessageBox");
 var LoadingWind_1 = require("./LoadingWind");
-var NetMgr_1 = require("../../YK/core/Net/NetMgr");
-var ModeMgr_1 = require("../../YK/core/ModeMgr/ModeMgr");
+// import { NetMgrEventDef, HttpRespData, NetMgr } from "../../YK/core/Net/NetMgr";
+// import { ModeMgr } from "../../YK/core/ModeMgr/ModeMgr";
 var RoleMode_1 = require("../Modes/RoleMode");
-var DispatchEventNode_1 = require("../../YK/core/EventMgr/DispatchEventNode");
+// import { Func, EventData } from "../../YK/core/EventMgr/DispatchEventNode";
+// import { ResponseDataInfo, ResponseMessageEvent } from "../../YK/core/Net/ResponseMessageEvent";
 var MainScene_1 = require("../Scenes/MainScene");
-var SceneMgr_1 = require("../../YK/core/SceneMgr/SceneMgr");
+// import { SceneMgr } from "../../YK/core/SceneMgr/SceneMgr";
 var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property;
 var LoginWind = /** @class */ (function (_super) {
     __extends(LoginWind, _super);
@@ -48,55 +49,57 @@ var LoginWind = /** @class */ (function (_super) {
         this.mLabelPass = this.UIObj.get("LabelPass").asTextField;
     };
     LoginWind.prototype.OnShowWind = function () {
-        UIMgr_1.UIMgr.Instance.HideWind(LoadingWind_1.LoadingWind);
+        YK.UIMgr.Instance.HideWind(LoadingWind_1.LoadingWind);
         this.eventMgr.addNetEvent(200);
-        this.eventMgr.addNetEvent(NetMgr_1.NetMgrEventDef.onopen);
-        this.eventMgr.addNetEvent(NetMgr_1.NetMgrEventDef.onerror);
-        this.eventMgr.addModeEvent(ModeMgr_1.ModeMgr.EventType.SENDINITMSGOK);
+        this.eventMgr.addNetEvent(YK.NetMgrEventDef.onopen);
+        this.eventMgr.addNetEvent(YK.NetMgrEventDef.onerror);
+        this.eventMgr.addModeEvent(YK.ModeMgr.EventType.SENDINITMSGOK);
     };
     LoginWind.prototype.OnHideWind = function () {
     };
     LoginWind.prototype.OnBtnClick = function (ev) {
         _super.prototype.OnBtnClick.call(this, ev);
-        if (ev.target.name == "BtnLogin") {
+        if (ev.currentTarget.$gobj.name == "BtnLogin") {
             this.HttpLogin();
         }
     };
     LoginWind.prototype.HttpLogin = function () {
         var _this = this;
+        this.OnInitMsged();
+        return;
         if (this.mLabelAcc.text == "" || this.mLabelPass.text == "") {
             MessageBox_1.MessageBox.Create("请输入账号密码").Show();
         }
         else {
-            UIMgr_1.UIMgr.Instance.ShowModalWait();
-            ModeMgr_1.ModeMgr.Instance.GetMode(RoleMode_1.RoleMode).SendHttpLogin(this.mLabelAcc.text, this.mLabelPass.text, new DispatchEventNode_1.Func(this, function (res) {
+            YK.UIMgr.Instance.ShowModalWait();
+            YK.ModeMgr.Instance.GetMode(RoleMode_1.RoleMode).SendHttpLogin(this.mLabelAcc.text, this.mLabelPass.text, new YK.Func(this, function (res) {
                 if (res != null) {
                     if (res.errorcode == 0) {
                         _this.ConnectServer();
                     }
                     else {
-                        UIMgr_1.UIMgr.Instance.CloseModalWait();
+                        YK.UIMgr.Instance.CloseModalWait();
                         MessageBox_1.MessageBox.Create(res.msg).Show();
                     }
                 }
                 else {
-                    UIMgr_1.UIMgr.Instance.CloseModalWait();
+                    YK.UIMgr.Instance.CloseModalWait();
                     MessageBox_1.MessageBox.Create("登陆失败尝试重新登陆").Show();
                 }
             }));
         }
     };
     LoginWind.prototype.ConnectServer = function () {
-        NetMgr_1.NetMgr.Instance.connect();
+        YK.NetMgr.Instance.connect();
     };
     LoginWind.prototype.OnConnetServer = function () {
-        ModeMgr_1.ModeMgr.Instance.GetMode(RoleMode_1.RoleMode).SendLogin();
+        YK.ModeMgr.Instance.GetMode(RoleMode_1.RoleMode).SendLogin();
     };
     LoginWind.prototype.OnLogin = function (ev) {
-        UIMgr_1.UIMgr.Instance.CloseModalWait();
+        YK.UIMgr.Instance.CloseModalWait();
         if (ev.head.errorcode == 0) {
-            UIMgr_1.UIMgr.Instance.ShowModalWait();
-            ModeMgr_1.ModeMgr.Instance.SendInitMsg();
+            YK.UIMgr.Instance.ShowModalWait();
+            YK.ModeMgr.Instance.SendInitMsg();
         }
         else {
             MessageBox_1.MessageBox.Create(ev.msg).Show();
@@ -104,23 +107,23 @@ var LoginWind = /** @class */ (function (_super) {
     };
     LoginWind.prototype.OnInitMsged = function () {
         console.error("开始游戏");
-        UIMgr_1.UIMgr.Instance.CloseModalWait();
-        SceneMgr_1.SceneMgr.Instance.GoToScene(MainScene_1.MainScene);
+        YK.UIMgr.Instance.CloseModalWait();
+        YK.SceneMgr.Instance.GoToScene(MainScene_1.MainScene);
     };
     LoginWind.prototype.OnConnetServerError = function (error) {
         var _this = this;
         MessageBox_1.MessageBox.Create("链接服务器失败，尝试重连")
-            .SetBtnConfirmCallBack(new DispatchEventNode_1.Func(this, function () {
+            .SetBtnConfirmCallBack(new YK.Func(this, function () {
             _this.ConnectServer();
         }), "重试")
             .Show();
     };
     LoginWind.prototype.OnNetMsg = function (ev) {
-        if (ev.cmd == NetMgr_1.NetMgrEventDef.onopen) {
+        if (ev.cmd == YK.NetMgrEventDef.onopen) {
             this.OnConnetServer();
         }
-        else if (ev.cmd == NetMgr_1.NetMgrEventDef.onerror
-            || ev.cmd == NetMgr_1.NetMgrEventDef.onclose) {
+        else if (ev.cmd == YK.NetMgrEventDef.onerror
+            || ev.cmd == YK.NetMgrEventDef.onclose) {
             this.OnConnetServerError(ev.data);
         }
         else {
@@ -130,7 +133,7 @@ var LoginWind = /** @class */ (function (_super) {
         }
     };
     LoginWind.prototype.OnHandler = function (ev) {
-        if (ev.cmd == ModeMgr_1.ModeMgr.EventType.SENDINITMSGOK) {
+        if (ev.cmd == YK.ModeMgr.EventType.SENDINITMSGOK) {
             this.OnInitMsged();
         }
     };
@@ -138,5 +141,5 @@ var LoginWind = /** @class */ (function (_super) {
         ccclass
     ], LoginWind);
     return LoginWind;
-}(UIMgr_1.BaseUI));
+}(YK.BaseUI));
 exports.LoginWind = LoginWind;

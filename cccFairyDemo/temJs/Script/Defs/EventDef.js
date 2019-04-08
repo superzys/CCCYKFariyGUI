@@ -1,4 +1,5 @@
 "use strict";
+// import { EventData } from "../../YK/core/EventMgr/DispatchEventNode";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -19,7 +20,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var DispatchEventNode_1 = require("../../YK/core/EventMgr/DispatchEventNode");
 // Learn TypeScript:
 //  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/typescript.html
 //  - [English] http://www.cocos2d-x.org/docs/creator/manual/en/scripting/typescript.html
@@ -62,5 +62,5 @@ var LoadingProgressEvenet = /** @class */ (function (_super) {
     });
     LoadingProgressEvenet.EventID = "LoadingProgressEvenet";
     return LoadingProgressEvenet;
-}(DispatchEventNode_1.EventData));
+}(YK.EventData));
 exports.LoadingProgressEvenet = LoadingProgressEvenet;

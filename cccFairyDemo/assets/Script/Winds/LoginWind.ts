@@ -1,18 +1,18 @@
-import { BaseUI, UIMgr } from "../../YK/core/UIMgr/UIMgr";
+// import { BaseUI, UIMgr } from "../../YK/core/UIMgr/UIMgr";
 import { MessageBox } from "./MessageBox";
 import { LoadingWind } from "./LoadingWind";
-import { NetMgrEventDef, HttpRespData, NetMgr } from "../../YK/core/Net/NetMgr";
-import { ModeMgr } from "../../YK/core/ModeMgr/ModeMgr";
+// import { NetMgrEventDef, HttpRespData, NetMgr } from "../../YK/core/Net/NetMgr";
+// import { ModeMgr } from "../../YK/core/ModeMgr/ModeMgr";
 import { RoleMode } from "../Modes/RoleMode";
-import { Func, EventData } from "../../YK/core/EventMgr/DispatchEventNode";
-import { ResponseDataInfo, ResponseMessageEvent } from "../../YK/core/Net/ResponseMessageEvent";
+// import { Func, EventData } from "../../YK/core/EventMgr/DispatchEventNode";
+// import { ResponseDataInfo, ResponseMessageEvent } from "../../YK/core/Net/ResponseMessageEvent";
 import { MainScene } from "../Scenes/MainScene";
-import { SceneMgr } from "../../YK/core/SceneMgr/SceneMgr";
+// import { SceneMgr } from "../../YK/core/SceneMgr/SceneMgr";
 
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export class LoginWind extends BaseUI
+export class LoginWind extends YK.BaseUI
 {
     protected packName = "LoginPack"
     protected resName = "LoginWindow"
@@ -34,11 +34,11 @@ export class LoginWind extends BaseUI
 
     protected OnShowWind()
     {
-        UIMgr.Instance.HideWind(LoadingWind)
+       YK. UIMgr.Instance.HideWind(LoadingWind)
         this.eventMgr.addNetEvent(200);
-        this.eventMgr.addNetEvent(NetMgrEventDef.onopen)
-        this.eventMgr.addNetEvent(NetMgrEventDef.onerror)
-        this.eventMgr.addModeEvent(ModeMgr.EventType.SENDINITMSGOK)
+        this.eventMgr.addNetEvent(YK.NetMgrEventDef.onopen)
+        this.eventMgr.addNetEvent(YK.NetMgrEventDef.onerror)
+        this.eventMgr.addModeEvent(YK.ModeMgr.EventType.SENDINITMSGOK)
     }
 
     protected OnHideWind()
@@ -66,10 +66,10 @@ export class LoginWind extends BaseUI
         }
         else
         {
-            UIMgr.Instance.ShowModalWait()
-            ModeMgr.Instance.GetMode<RoleMode>(RoleMode).SendHttpLogin(this.mLabelAcc.text,
+            YK.UIMgr.Instance.ShowModalWait()
+            YK.ModeMgr.Instance.GetMode<RoleMode>(RoleMode).SendHttpLogin(this.mLabelAcc.text,
                 this.mLabelPass.text,
-                new Func(this, (res: HttpRespData) =>
+                new YK.Func(this, (res: YK.HttpRespData) =>
                 {
 
                     if (res != null)
@@ -80,13 +80,13 @@ export class LoginWind extends BaseUI
                         }
                         else
                         {
-                            UIMgr.Instance.CloseModalWait()
+                            YK.UIMgr.Instance.CloseModalWait()
                             MessageBox.Create(res.msg).Show()
                         }
                     }
                     else
                     {
-                        UIMgr.Instance.CloseModalWait()
+                        YK.UIMgr.Instance.CloseModalWait()
                         MessageBox.Create("登陆失败尝试重新登陆").Show()
                     }
                 }))
@@ -95,21 +95,21 @@ export class LoginWind extends BaseUI
 
     public ConnectServer()
     {
-        NetMgr.Instance.connect()
+        YK.NetMgr.Instance.connect()
     }
 
     public OnConnetServer()
     {
-        ModeMgr.Instance.GetMode<RoleMode>(RoleMode).SendLogin()
+        YK. ModeMgr.Instance.GetMode<RoleMode>(RoleMode).SendLogin()
     }
 
-    public OnLogin(ev: ResponseDataInfo)
+    public OnLogin(ev: YK.ResponseDataInfo)
     {
-        UIMgr.Instance.CloseModalWait()
+        YK. UIMgr.Instance.CloseModalWait()
         if (ev.head.errorcode == 0)
         {
-            UIMgr.Instance.ShowModalWait()
-            ModeMgr.Instance.SendInitMsg()
+            YK.UIMgr.Instance.ShowModalWait()
+            YK.ModeMgr.Instance.SendInitMsg()
         }
         else
         {
@@ -121,29 +121,29 @@ export class LoginWind extends BaseUI
     public OnInitMsged()
     {
         console.error("开始游戏")
-        UIMgr.Instance.CloseModalWait()
+        YK.UIMgr.Instance.CloseModalWait()
 
-        SceneMgr.Instance.GoToScene(MainScene)
+        YK.SceneMgr.Instance.GoToScene(MainScene)
     }
 
     public OnConnetServerError(error: string)
     {
         MessageBox.Create("链接服务器失败，尝试重连")
-            .SetBtnConfirmCallBack(new Func(this, () =>
+            .SetBtnConfirmCallBack(new YK.Func(this, () =>
             {
                 this.ConnectServer()
             }), "重试")
             .Show()
     }
 
-    protected OnNetMsg(ev: ResponseMessageEvent)
+    protected OnNetMsg(ev: YK.ResponseMessageEvent)
     {
-        if (ev.cmd == NetMgrEventDef.onopen)
+        if (ev.cmd == YK.NetMgrEventDef.onopen)
         {
             this.OnConnetServer()
         }
-        else if (ev.cmd == NetMgrEventDef.onerror
-            || ev.cmd == NetMgrEventDef.onclose)
+        else if (ev.cmd == YK.NetMgrEventDef.onerror
+            || ev.cmd == YK.NetMgrEventDef.onclose)
         {
             this.OnConnetServerError(ev.data)
         }
@@ -156,9 +156,9 @@ export class LoginWind extends BaseUI
         }
     }
 
-    protected OnHandler(ev: EventData)
+    protected OnHandler(ev: YK.EventData)
     {
-        if (ev.cmd == ModeMgr.EventType.SENDINITMSGOK)
+        if (ev.cmd == YK.ModeMgr.EventType.SENDINITMSGOK)
         {
             this.OnInitMsged()
         }

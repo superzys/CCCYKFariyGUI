@@ -1,10 +1,10 @@
-import { BaseUI, UIMgr } from "../../YK/core/UIMgr/UIMgr";
-import { Func } from "../../YK/core/EventMgr/DispatchEventNode";
+// import { BaseUI, UIMgr } from "../../YK/core/UIMgr/UIMgr";
+// import { Func } from "../../YK/core/EventMgr/DispatchEventNode";
 
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export class MessageBox extends BaseUI
+export class MessageBox extends YK.BaseUI
 {
     public modal: boolean = true
     public dontDel: boolean = true
@@ -133,17 +133,17 @@ class MessageBoxData
 
     public content: string = null
 
-    public BtnOkCallBack: Func = null
+    public BtnOkCallBack:YK. Func = null
     public labBtnOkStr: string = null
 
-    public BtnCancelCallBack: Func = null
+    public BtnCancelCallBack: YK.Func = null
     public labBtnCancelStr: string = null
 
-    public BtnBtnConfirmCallBack: Func = null
+    public BtnBtnConfirmCallBack: YK.Func = null
     public labBtnConfirmStr: string = null
 
-    public SetBtnOkAndCancelCallBack(okCallBack: Func, okStr: string = "好的",
-        cancelCallBack: Func = null, cancelStr: string = "好的")
+    public SetBtnOkAndCancelCallBack(okCallBack: YK.Func, okStr: string = "好的",
+        cancelCallBack: YK.Func = null, cancelStr: string = "好的")
     {
         this.BtnOkCallBack = okCallBack
         this.labBtnOkStr = okStr
@@ -152,7 +152,7 @@ class MessageBoxData
         return this
     }
 
-    public SetBtnConfirmCallBack(callBack: Func, labStr: string = "确定")
+    public SetBtnConfirmCallBack(callBack: YK.Func, labStr: string = "确定")
     {
         this.BtnBtnConfirmCallBack = callBack
         this.labBtnConfirmStr = labStr
@@ -182,6 +182,6 @@ class MessageBoxData
 
     public Show()
     {
-        UIMgr.Instance.ShowWind(MessageBox, this)
+        YK.UIMgr.Instance.ShowWind(MessageBox, this)
     }
 }

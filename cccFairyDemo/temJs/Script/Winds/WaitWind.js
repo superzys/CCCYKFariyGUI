@@ -1,4 +1,5 @@
 "use strict";
+// import { YK.TimeDelay } from "../../YK/core/Util/TimeDelay";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -19,7 +20,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var TimeDelay_1 = require("../../YK/core/Util/TimeDelay");
 var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property;
 var WaitWind = /** @class */ (function (_super) {
     __extends(WaitWind, _super);
@@ -47,15 +47,15 @@ var WaitWind = /** @class */ (function (_super) {
         configurable: true
     });
     WaitWind.prototype.__onShown = function () {
-        TimeDelay_1.TimeDelay.Instance.Remove(this.ShownLoadingRing, this);
-        TimeDelay_1.TimeDelay.Instance.Remove(this.TimeOut, this);
-        TimeDelay_1.TimeDelay.Instance.Add(1, 1, this.ShownLoadingRing, this);
-        TimeDelay_1.TimeDelay.Instance.Add(10, 1, this.TimeOut, this);
+        YK.TimeDelay.Instance.Remove(this.ShownLoadingRing, this);
+        YK.TimeDelay.Instance.Remove(this.TimeOut, this);
+        YK.TimeDelay.Instance.Add(1, 1, this.ShownLoadingRing, this);
+        YK.TimeDelay.Instance.Add(10, 1, this.TimeOut, this);
         this.state.selectedIndex = 1;
     };
     WaitWind.prototype.__onHidden = function () {
-        TimeDelay_1.TimeDelay.Instance.Remove(this.ShownLoadingRing, this);
-        TimeDelay_1.TimeDelay.Instance.Remove(this.TimeOut, this);
+        YK.TimeDelay.Instance.Remove(this.ShownLoadingRing, this);
+        YK.TimeDelay.Instance.Remove(this.TimeOut, this);
     };
     WaitWind.prototype.ShownLoadingRing = function () {
         this.state.selectedIndex = 0;

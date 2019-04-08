@@ -1,10 +1,10 @@
-import { BaseUI } from "../../YK/core/UIMgr/UIMgr";
-import { EventData } from "../../YK/core/EventMgr/DispatchEventNode";
+// import { BaseUI } from "../../YK/core/UIMgr/UIMgr";
+// import { EventData } from "../../YK/core/EventMgr/DispatchEventNode";
 
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export class MainWind extends BaseUI
+export class MainWind extends YK.BaseUI
 {
     protected packName = "MainPack"
     protected resName = "MainWindow"
@@ -25,7 +25,7 @@ export class MainWind extends BaseUI
     {
 
     }
-    protected OnHandler(ev: EventData)
+    protected OnHandler(ev: YK.EventData)
     {
     }
 }

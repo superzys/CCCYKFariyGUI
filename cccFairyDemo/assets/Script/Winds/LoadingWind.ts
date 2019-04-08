@@ -1,12 +1,12 @@
-import { BaseUI } from "../../YK/core/UIMgr/UIMgr";
+// import { BaseUI } from "../../YK/core/UIMgr/UIMgr";
 import { LoadingProgressEvenet } from "../Defs/EventDef";
-import { EventData } from "../../YK/core/EventMgr/DispatchEventNode";
+// import { EventData } from "../../YK/core/EventMgr/DispatchEventNode";
 
  
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export class LoadingWind extends BaseUI
+export class LoadingWind extends YK.BaseUI
 {
     protected packName = "Loading"
     protected resName = "loadingWind"
@@ -42,7 +42,7 @@ export class LoadingWind extends BaseUI
     {
 
     }
-    protected OnHandler(ev: EventData)
+    protected OnHandler(ev: YK.EventData)
     {
         switch (ev.cmd)
         {

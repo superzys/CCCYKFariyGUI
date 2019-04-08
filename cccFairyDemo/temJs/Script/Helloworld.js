@@ -19,10 +19,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var ModeMgr_1 = require("../YK/core/ModeMgr/ModeMgr");
-var SceneMgr_1 = require("../YK/core/SceneMgr/SceneMgr");
 var RoleMode_1 = require("./Modes/RoleMode");
-var LoadingScene_1 = require("./Scenes/LoadingScene");
 var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property;
 var Helloworld = /** @class */ (function (_super) {
     __extends(Helloworld, _super);
@@ -35,15 +32,22 @@ var Helloworld = /** @class */ (function (_super) {
     Helloworld.prototype.onLoad = function () {
         fgui.addLoadHandler();
         fgui.GRoot.create();
+        // 显示节点包装，未后面的适配做准备
+        this._viewNode = new cc.Node();
+        this._viewNode.name = 'stage';
+        this._viewNode.parent = cc.director.getScene();
+        fgui.GRoot.inst.node.parent = this._viewNode;
     };
     Helloworld.prototype.start = function () {
         // init logic
         this.label.string = this.text;
         fgui.UIConfig.globalModalWaiting = "ui://Loading/waitWind";
         // NetMgr.Instance.AddProto("NetPack.proto", ProtocolDef.ProtocolNames)
-        ModeMgr_1.ModeMgr.Instance.AddMode(RoleMode_1.RoleMode);
-        ModeMgr_1.ModeMgr.Instance.InitData();
-        SceneMgr_1.SceneMgr.Instance.GoToScene(LoadingScene_1.LoadingScene);
+        var one = new RoleMode_1.RoleMode();
+        YK.Log.Log("ne wone model");
+        //    YK. ModeMgr.Instance.AddMode<RoleMode>(RoleMode)
+        //    YK.ModeMgr.Instance.InitData()
+        //    YK. SceneMgr.Instance.GoToScene(LoadingScene)
     };
     __decorate([
         property(cc.Label)

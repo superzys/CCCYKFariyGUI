@@ -1,6 +1,4 @@
-import { NetMgr } from "../YK/core/Net/NetMgr";
-import { ModeMgr } from "../YK/core/ModeMgr/ModeMgr";
-import { SceneMgr } from "../YK/core/SceneMgr/SceneMgr";
+
 import { RoleMode } from "./Modes/RoleMode";
 import { LoadingScene } from "./Scenes/LoadingScene";
 import { ProtocolDef } from "./Defs/ProtocolDef";
@@ -25,6 +23,7 @@ export default class Helloworld extends cc.Component {
         this._viewNode.name = 'stage';
         this._viewNode.parent = cc.director.getScene();
         fgui.GRoot.inst.node.parent = this._viewNode;
+     
     }
 
     start () {
@@ -33,9 +32,14 @@ export default class Helloworld extends cc.Component {
 
         fgui.UIConfig.globalModalWaiting = "ui://Loading/waitWind"
         // NetMgr.Instance.AddProto("NetPack.proto", ProtocolDef.ProtocolNames)
-        ModeMgr.Instance.AddMode<RoleMode>(RoleMode)
-        ModeMgr.Instance.InitData()
-        SceneMgr.Instance.GoToScene(LoadingScene)
-        
+
+        // YK.TimeDelay
+        // var one = new RoleMode();
+        YK.Log.Log("ne wone model");
+       YK. ModeMgr.Instance.AddMode<RoleMode>(RoleMode)
+       YK.ModeMgr.Instance.InitData()
+       YK. SceneMgr.Instance.GoToScene(LoadingScene)
+      
+    
     }
 }

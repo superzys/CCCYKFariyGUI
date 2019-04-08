@@ -1,5 +1,5 @@
-import { SceneBase } from "../../YK/core/SceneMgr/SceneBase";
-import { EventData } from "../../YK/core/EventMgr/DispatchEventNode";
+// import { SceneBase } from "../../YK/core/SceneMgr/SceneBase";
+// import { EventData } from "../../YK/core/EventMgr/DispatchEventNode";
 import { LoadingWind } from "../Winds/LoadingWind";
 import { LoginWind } from "../Winds/LoginWind";
 
@@ -7,7 +7,7 @@ import { LoginWind } from "../Winds/LoginWind";
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export class LoginScene extends SceneBase
+export class LoginScene extends YK.SceneBase
 {
     protected firstWind: any = LoginWind
     protected OnInit(param: any)
@@ -24,7 +24,7 @@ export class LoginScene extends SceneBase
         super.OnEnter(param)
     }
 
-    protected OnHandler(ev: EventData)
+    protected OnHandler(ev: YK.EventData)
     {
         super.OnHandler(ev)
     }

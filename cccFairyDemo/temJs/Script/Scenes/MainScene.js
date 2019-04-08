@@ -19,7 +19,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var SceneBase_1 = require("../../YK/core/SceneMgr/SceneBase");
+// import { SceneBase } from "../../YK/core/SceneMgr/SceneBase";
+// import { EventData } from "../../YK/core/EventMgr/DispatchEventNode";
 var MainWind_1 = require("../Winds/MainWind");
 var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property;
 var MainScene = /** @class */ (function (_super) {
@@ -56,5 +57,5 @@ var MainScene = /** @class */ (function (_super) {
         ccclass
     ], MainScene);
     return MainScene;
-}(SceneBase_1.SceneBase));
+}(YK.SceneBase));
 exports.MainScene = MainScene;

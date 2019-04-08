@@ -1,4 +1,4 @@
-import { TimeDelay } from "../../YK/core/Util/TimeDelay";
+// import { YK.TimeDelay } from "../../YK/core/Util/TimeDelay";
 
 const { ccclass, property } = cc._decorator;
 
@@ -42,18 +42,18 @@ export class WaitWind extends fgui.GComponent
     protected __onShown()
     {
 
-        TimeDelay.Instance.Remove(this.ShownLoadingRing, this)
-        TimeDelay.Instance.Remove(this.TimeOut, this)
+        YK.TimeDelay.Instance.Remove(this.ShownLoadingRing, this)
+        YK.TimeDelay.Instance.Remove(this.TimeOut, this)
 
-        TimeDelay.Instance.Add(1, 1, this.ShownLoadingRing, this)
-        TimeDelay.Instance.Add(10, 1, this.TimeOut, this)
+        YK.TimeDelay.Instance.Add(1, 1, this.ShownLoadingRing, this)
+        YK.TimeDelay.Instance.Add(10, 1, this.TimeOut, this)
         this.state.selectedIndex = 1
     }
 
     protected __onHidden()
     {
-        TimeDelay.Instance.Remove(this.ShownLoadingRing, this)
-        TimeDelay.Instance.Remove(this.TimeOut, this)
+        YK.TimeDelay.Instance.Remove(this.ShownLoadingRing, this)
+        YK.TimeDelay.Instance.Remove(this.TimeOut, this)
     }
 
 

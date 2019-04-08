@@ -1,4 +1,4 @@
-import { EventData } from "../../YK/core/EventMgr/DispatchEventNode";
+// import { EventData } from "../../YK/core/EventMgr/DispatchEventNode";
 
 // Learn TypeScript:
 //  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/typescript.html
@@ -19,7 +19,7 @@ export class EventDef extends cc.Component
 
 }
 
-export class LoadingProgressEvenet extends EventData
+export class LoadingProgressEvenet extends YK.EventData
 {
     
     public data: LoadingProgressData

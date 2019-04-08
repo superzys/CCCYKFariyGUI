@@ -19,8 +19,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var UIMgr_1 = require("../../YK/core/UIMgr/UIMgr");
+// import { BaseUI } from "../../YK/core/UIMgr/UIMgr";
 var EventDef_1 = require("../Defs/EventDef");
+// import { EventData } from "../../YK/core/EventMgr/DispatchEventNode";
 var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property;
 var LoadingWind = /** @class */ (function (_super) {
     __extends(LoadingWind, _super);
@@ -65,5 +66,5 @@ var LoadingWind = /** @class */ (function (_super) {
         ccclass
     ], LoadingWind);
     return LoadingWind;
-}(UIMgr_1.BaseUI));
+}(YK.BaseUI));
 exports.LoadingWind = LoadingWind;

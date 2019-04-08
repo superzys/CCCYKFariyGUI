@@ -9,7 +9,7 @@ window.__extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-
+console.log("fgui js load");
 (function (fgui) {
     var AsyncOperation = /** @class */ (function () {
         function AsyncOperation() {

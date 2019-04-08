@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "lib": [ "dom", "es5", "es2015.promise" ],
+    "target": "es5",
+    "allowJs": true,
+    "outDir": "./temJs",   
+    "experimentalDecorators": true,
+    "esModuleInterop": true, 
+    "skipLibCheck": true
+  },
+  "exclude": [
+    "node_modules",
+    "YK",
+    "temJs",
+    "library",
+    "local",
+    "temp",
+    "build",
+    "settings"
+  ]
+}
